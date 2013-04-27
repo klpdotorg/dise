@@ -4,7 +4,7 @@ import csv
 dise = pd.read_csv('dise_facility_enrol.csv')
 grouped = dise.groupby('district')
 
-fieldnames = ['district', 'classrooms', 'blackboards', 'playgrounds',
+fieldnames = ['district','schools', 'classrooms', 'blackboards', 'playgrounds',
 'toilets_common', 'toilets_boys', 'toilets_girls',
 'libraries', 'books', 'computers', 'electricity_y',
 'electricity_n', 'electricity_non', 'students', 'boys', 'girls',
@@ -16,7 +16,7 @@ writer.writeheader()
 
 for name, group in grouped:
 
-        data = {'district':'', 'classrooms':'', 'blackboards':'', 'playgrounds':'',
+        data = {'district':'','schools':'', 'classrooms':'', 'blackboards':'', 'playgrounds':'',
         'toilets_common':'', 'toilets_boys':'', 'toilets_girls':'',
         'libraries':'', 'books':'', 'computers':'', 'electricity_y':'',
         'electricity_n':'', 'electricity_non':'', 'students':'', 'boys':'', 'girls':'',
@@ -24,6 +24,7 @@ for name, group in grouped:
 
         data['district']= name
         print name
+        data['schools']=group.__len__()
         data['classrooms']= sum(group.tot_clrooms)
         data['blackboards']= sum(group.blackboard)
         playgrounds = 0
